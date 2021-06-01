@@ -5,5 +5,9 @@ jdk:
 branches:
   only:
     - build
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
 
-script: "./gradlew bootjar"
+script: "./gradlew clean build"
