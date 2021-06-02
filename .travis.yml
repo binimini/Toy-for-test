@@ -5,10 +5,19 @@ jdk:
 branches:
   only:
     - build
+services:
+  - docker
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
+
 before_install:
   - chmod +x gradlew
 script: "./gradlew clean build"
+
+after_success:
+  - echo "start creating docker image"
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker build -t $DOCKER_USER/travis:latest .
+  - docker push $DOCKER_USER/travis:latest
