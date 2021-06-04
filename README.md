@@ -1,2 +1,14 @@
 # Toy-for-test
 Toy project for testing new learning
+
+## Travis CI
+
+Continuous Integration (CI) : merge small code change frequently
+
+Travis CI clone git repository to new virtual environment and conduct script
+
+- [X] Travis : build branch에 PR(push)시 빌드
+
+- [X] Travis : PR시 Docker Image build 후 Push
+
+- [ ] Travis : AWS CodeDeploy로 배포
