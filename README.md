@@ -1,8 +1,14 @@
 # Toy-for-test
 Toy project for testing new learning
 
-- [X] Travis : 특정 브랜치에 PR(push)시 빌드
+## Travis CI
 
-- [ ] Travis : Docker Image build 후 Push
+Continuous Integration (CI) : merge small code change frequently
+
+Travis CI clone git repository to new virtual environment and conduct script
+
+- [X] Travis : build branch에 PR(push)시 빌드
+
+- [X] Travis : PR시 Docker Image build 후 Push
 
 - [ ] Travis : AWS CodeDeploy로 배포
