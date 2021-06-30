@@ -1,18 +1,14 @@
-package study.toy.controller;
+package study.toy;
 
 
-import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import study.toy.dto.UsingChromeDriver;
+import study.toy.chromedriver.UsingChromeDriver;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
