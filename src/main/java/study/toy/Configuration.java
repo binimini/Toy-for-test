@@ -1,4 +1,4 @@
-package study.toy.dto;
+package study.toy;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -19,6 +19,7 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.discord4j:discord4j-core:3.1.5'
 	compile('org.seleniumhq.selenium:selenium-java:3.4.0') {
 		exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
 		exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
