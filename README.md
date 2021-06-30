@@ -12,3 +12,9 @@ Travis CI clone git repository to new virtual environment and conduct script
 - [X] Travis : PR시 Docker Image build 후 Push
 
 - [ ] Travis : AWS CodeDeploy로 배포
+
+## Spring
+
+- [X] AOP : Aspect 만들어보기
+
+- [ ] AOP : Aspect 이용해서 로깅 구현하기
