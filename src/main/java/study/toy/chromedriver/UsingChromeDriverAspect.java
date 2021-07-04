@@ -3,6 +3,7 @@ package study.toy.chromedriver;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,11 +15,4 @@ public class UsingChromeDriverAspect {
     @Autowired
     private WebDriver driver;
 
-    @Around("@annotation(UsingChromeDriver)")
-    public Object setUpAndQuit(ProceedingJoinPoint joinPoint) throws Throwable{
-        System.out.println("before");
-        Object proceed = joinPoint.proceed(); // 타겟 메소드 실행
-        System.out.println("after");
-        return proceed;
-    }
 }

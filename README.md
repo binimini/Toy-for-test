@@ -18,3 +18,11 @@ Travis CI clone git repository to new virtual environment and conduct script
 - [X] AOP : Aspect 만들어보기
 
 - [ ] AOP : Aspect 이용해서 로깅 구현하기
+
+- [ ] Reactor : Mono(publisher) 익히기
+
+## Discord API
+
+- [X] Discord : Gateway 통해 command response
+
+- [ ] Discord : Webhook 통해 command response

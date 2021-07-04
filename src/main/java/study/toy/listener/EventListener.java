@@ -1,6 +1,7 @@
-package study.toy;
+package study.toy.listener;
 
 import discord4j.core.event.domain.Event;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface EventListener <T extends Event>{

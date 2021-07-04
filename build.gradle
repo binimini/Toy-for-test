@@ -9,6 +9,16 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+	all{
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+
+		exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
+		exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
+		exclude group: 'org.seleniumhq.selenium', module: 'selenium-safari-driver'
+		exclude group: 'org.webbitserver', module: 'webbit'
+		exclude group: 'commons-codec', module: 'commons-codec'
+		exclude group: 'cglib', module: 'cglib-nodep'
+	}
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -19,15 +29,9 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	implementation 'com.discord4j:discord4j-core:3.1.5'
-	compile('org.seleniumhq.selenium:selenium-java:3.4.0') {
-		exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
-		exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
-		exclude group: 'org.seleniumhq.selenium', module: 'selenium-safari-driver'
-		exclude group: 'org.webbitserver', module: 'webbit'
-		exclude group: 'commons-codec', module: 'commons-codec'
-		exclude group: 'cglib', module: 'cglib-nodep'
-	}
+	compile 'org.seleniumhq.selenium:selenium-java:3.4.0'
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
