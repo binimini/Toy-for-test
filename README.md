@@ -14,8 +14,9 @@ Travis CI clone git repository to new virtual environment and conduct script
 - [ ] Travis : AWS CodeDeploy로 배포
 
 ## Jenkins
-
-- [ ] Webhook : github build branch에 PR(push)시 빌드 & 배포
+- [X] Pipeline script from SCM : credential 설정 후 github 연동
+- [X] pipeline script : config file provider plugin에서 properties 내용 읽어 생성, spring build
+- [ ] Docker : docker 연동으로 jenkins 컨테이너 아닌 서버 컨테이너에서 jar run
 
 ## Spring
 
