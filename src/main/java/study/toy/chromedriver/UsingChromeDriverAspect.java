@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 @Aspect
 //모든 함수 실행 직전에 set up - 실행 후 quit
 public class UsingChromeDriverAspect {
-    @Autowired
-    private WebDriver driver;
+    private final WebDriver driver;
 
+    public UsingChromeDriverAspect(WebDriver driver){
+        this.driver = driver;
+    }
 }

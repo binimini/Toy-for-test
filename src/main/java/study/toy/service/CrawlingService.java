@@ -21,11 +21,17 @@ import java.util.List;
 @Slf4j
 @RestController
 public class CrawlingService {
-    @Autowired
-    private  WebDriver driver;
-    @Autowired
-    GatewayDiscordClient discordClient;
+    private final WebDriver driver;
+    private final GatewayDiscordClient discordClient;
+
     private static final String url = "https://lolesports.com/schedule?leagues=lck";
+
+    @Autowired
+    public CrawlingService(WebDriver driver, GatewayDiscordClient discordClient){
+        // 생성자 주입 순환 참조 컴파일 시기에 방지, final(불변성 확보) 가능, DI 프레임워크 없어도 작동
+        this.driver = driver;
+        this.discordClient = discordClient;
+    }
 
     @UsingChromeDriver
     public List<String> schedule(int startMonth, int startDay) throws Exception{

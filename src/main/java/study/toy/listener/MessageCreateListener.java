@@ -15,8 +15,11 @@ import java.util.List;
 @Slf4j
 @Service
 public class MessageCreateListener implements EventListener<MessageCreateEvent> {
-    @Autowired
-    CrawlingService service;
+    private final CrawlingService service;
+
+    public MessageCreateListener(CrawlingService crawlingService){
+        this.service = crawlingService;
+    }
 
     @Override
     public Class<MessageCreateEvent> getEventType() {
