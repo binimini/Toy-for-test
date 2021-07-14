@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import study.toy.chromedriver.UsingChromeDriver;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Slf4j
@@ -27,27 +28,52 @@ public class CrawlingService {
     private static final String url = "https://lolesports.com/schedule?leagues=lck";
 
     @UsingChromeDriver
-    public List<String> schedule() throws Exception{
+    public List<String> schedule(int startMonth, int startDay) throws Exception{
+        Long startTime = System.currentTimeMillis();
         log.info("Crawling started at "+url);
         driver.get(url);
-        List<WebElement> dates = driver.findElements(By.className("EventDate"));
-        List<WebElement> matches = driver.findElements(By.className("EventMatch"));
-        System.out.println(dates.size());
-        System.out.println(matches.size());
-
-        String message = "";
-        List<String> result = new ArrayList<>();
-        for ( int i = 0; i<dates.size(); i++) {
-            message = "";
-
-            message += dates.get(i).getText();
-            message += matches.get(2*i).getText();
-            message += matches.get(2*i+1).getText();
-            message +="\n";
-
-            result.add(message);
+        List<WebElement> datesAndMatches = driver.findElements(By.cssSelector(".EventDate, .EventMatch"));
+        Long midTime1 = System.currentTimeMillis();
+        int month, day, messageCnt = 0;
+        if (startMonth==0&&startDay==0){
+            Calendar calendar = Calendar.getInstance();
+            month = calendar.get(Calendar.MONTH) + 1;
+            day = calendar.get(Calendar.DAY_OF_MONTH);
         }
-        System.out.println(result);
+        else {
+            month = startMonth;
+            day = startDay;
+        }
+        log.info("Setting date to "+month+"월 "+day+"일\n");
+        List<String> result = new ArrayList<>();
+        Long midTime2 = System.currentTimeMillis();
+        for ( int i = 0; i<datesAndMatches.size(); i++) {
+            if (messageCnt==5) break;
+
+            String message = "";
+            String queryStr = datesAndMatches.get(i).getText();
+            if (!(queryStr.contains("요일"))) continue;
+            int firstIdx = queryStr.indexOf("–"), firstIdxEnds = queryStr.indexOf("월", firstIdx);
+            int secondIdx = queryStr.indexOf(" ",firstIdx), secondIdxEnds = queryStr.indexOf("일", secondIdx);
+            int queryMonth =Integer.parseInt(queryStr.substring(firstIdx+1, firstIdxEnds));
+            int queryDay = Integer.parseInt(queryStr.substring(secondIdx+1,secondIdxEnds));
+            if (!(queryMonth>month||(queryMonth==month&&queryDay>=day))) continue;
+
+            message += datesAndMatches.get(i).getText();
+            message += '\n';
+            message += datesAndMatches.get(i+1).getText().replaceAll("LCK\n최대 경기 수 3", "").replaceAll("\n", " ");
+            if (!datesAndMatches.get(i+2).getText().contains("요일")) {
+                message += "\n";
+                message += datesAndMatches.get(i+2).getText().replaceAll("LCK\n최대 경기 수 3", "").replaceAll("\n"," ");
+                i+=1;
+            }
+            i+=1;
+            message += "\n\n";
+            result.add(message);
+            messageCnt++;
+        }
+        Long endTime = System.currentTimeMillis();
+        log.info((midTime1- startTime)+" "+(midTime2- startTime)+" "+(endTime- startTime));
         log.info("Crawling ended");
         return result;
     }

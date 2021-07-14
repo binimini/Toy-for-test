@@ -26,14 +26,29 @@ public class MessageCreateListener implements EventListener<MessageCreateEvent> 
     @Override
     public Mono<Void> execute(MessageCreateEvent event) {
         Flux<String> scheduleFlux = null;
-        log.info("Message Content : "+event.getMessage().getContent()+" Created!");
-        if (event.getMessage().getContent().equals("!schedule")) {
-            try {
-                scheduleFlux = Flux.fromIterable(service.schedule());
-            } catch (Exception e) {
-                return Mono.empty();
+
+        if (!event.getMessage().getAuthor().get().isBot()) {                //봇 메세지 제외
+            log.info("Message Content : " + event.getMessage().getContent() + " Created!");
+            if (event.getMessage().getContent().contains("!schedule")) {      //!schedule
+                try {
+                    long startTime = System.currentTimeMillis();
+                    String[] dates = event.getMessage().getContent().split(" ");
+                    if (dates.length==1)                                 //date 입력 체크
+                        scheduleFlux = Flux.fromIterable(service.schedule(0,0));
+                    else
+                        scheduleFlux = Flux.fromIterable(service.schedule(Integer.parseInt(dates[1].substring(0,2)), Integer.parseInt(dates[1].substring(2,4))));
+                    long endTime = System.currentTimeMillis();
+                    log.info("duration time : "+(endTime-startTime)+"milliseconds\n");
+                    return scheduleFlux.flatMap(str -> event.getMessage().getChannel().flatMap(channel -> channel.createMessage(str))).then().log();
+                }
+                catch (Exception e) {                                     //Crawling exception
+                    log.error("Crawling Service Exception is threw");
+                    log.error(e.toString());
+                    log.error(e.getMessage());
+                }
             }
+
         }
-        return scheduleFlux.flatMap(str -> event.getMessage().getChannel().flatMap(channel->channel.createMessage(str))).then().log();
+        return Mono.empty();
     }
 }
