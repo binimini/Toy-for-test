@@ -13,6 +13,10 @@ Travis CI clone git repository to new virtual environment and conduct script
 
 - [ ] Travis : AWS CodeDeploy로 배포
 
+## Jenkins
+
+- [ ] Webhook : github build branch에 PR(push)시 빌드 & 배포
+
 ## Spring
 
 - [X] AOP : Aspect 만들어보기
