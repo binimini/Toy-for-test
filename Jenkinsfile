@@ -1,11 +1,11 @@
 node {
     stage ('clone') {
-        git 'https://github.com/jojoldu/jenkins-pipeline.git' // git clone
+        git 'https://github.com/binimini/Toy-for-test.git' // git clone
     }
     stage('config'){
         dir('src/main/resources/'){
             configFileProvider([configFile(fileId: 'token_properties', variable: 'TOKEN')]) {
-                    def contents = readProperties file: "$TOKEN"
+                    def contents = readFile file: "$TOKEN"
                     writeFile file: 'application.properties', text: contents
                 }
         }
