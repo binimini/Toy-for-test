@@ -1,8 +1,4 @@
 node {
-    environment{
-        registry = "binimini/toy-discord"
-        registryCredential = "docker-hub-credential"
-    }
     stage ('clone') {
         git 'https://github.com/binimini/Toy-for-test.git' // git clone
     }
@@ -18,7 +14,7 @@ node {
         sh './gradlew bootjar'
     }
     stage('docker build'){
-        app = docker.build("$registry")
+        def app = docker.build("binimini/toy-discord")
     }
     stage('docker push') {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credential')
