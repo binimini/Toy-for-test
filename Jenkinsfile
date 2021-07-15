@@ -17,7 +17,7 @@ node {
         sshPublisher(publishers:
         [sshPublisherDesc(configName: 'deploy-server', transfers:
         [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls', execTimeout: 120000, flatten: false, makeEmptyDirs: false,
-        noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/dev', remoteDirectorySDF: false, removePrefix: 'build/libs', sourceFiles: 'build/lilbs/*.jar')]
+        noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/dev', remoteDirectorySDF: false, removePrefix: 'build/libs', sourceFiles: 'build/libs/*.jar')]
         ,usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
     }
 }
