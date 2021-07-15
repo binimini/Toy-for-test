@@ -1,6 +1,6 @@
 FROM openjdk:11-jre-slim
 
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=*.jar
 
 EXPOSE 8080
 

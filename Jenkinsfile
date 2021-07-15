@@ -1,6 +1,6 @@
 node {
     stage ('clone') {
-        git 'https://github.com/binimini/Toy-for-test.git' // git clone
+        git branch: 'main', credentialsId: 'localhost-credential', poll: false, url: 'https://github.com/binimini/Toy-for-test'
     }
     stage('config'){
         dir('src/main/resources/'){
