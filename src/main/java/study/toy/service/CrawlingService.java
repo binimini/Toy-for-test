@@ -25,7 +25,7 @@ public class CrawlingService {
 
     private static final String url = "https://lolesports.com/schedule?leagues=lck";
 
-    public CrawlingService(WebDriver driver, GatewayDiscordClient discordClient){
+    public CrawlingService(WebDriver driver){
         // 생성자 주입 순환 참조 컴파일 시기에 방지, final(불변성 확보) 가능, DI 프레임워크 없어도 작동
         this.driver = driver;
     }

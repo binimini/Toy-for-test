@@ -17,8 +17,12 @@ import java.util.List;
 @org.springframework.context.annotation.Configuration
 @EnableAspectJAutoProxy
 public class Configuration {
+    @Value("${token}")
+    private String token;
+    @Value("${web_driver_path}")
+    private String WEB_DRIVER_PATH;
     private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    private static final String WEB_DRIVER_PATH = "C:/Users/USER/Downloads/chromedriver_win32/chromedriver.exe";
+
     @Bean
     public WebDriver webDriver() {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
@@ -27,8 +31,6 @@ public class Configuration {
         return new ChromeDriver(options);
     }
 
-    @Value("${token}")
-    private String token;
 
     @Bean
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(List<EventListener<T>> eventListeners) {
