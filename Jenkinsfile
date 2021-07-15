@@ -13,4 +13,11 @@ node {
     stage('build'){
         sh './gradlew bootjar'
     }
+    stage('publish'){
+        sshPublisher(publishers:
+        [sshPublisherDesc(configName: 'deploy-server', transfers:
+        [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls', execTimeout: 120000, flatten: false, makeEmptyDirs: false,
+        noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/dev', remoteDirectorySDF: false, removePrefix: 'build/libs', sourceFiles: 'build/lilbs/*.jar')]
+        ,usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+    }
 }
