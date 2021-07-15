@@ -13,11 +13,4 @@ node {
     stage('build'){
         sh './gradlew bootjar'
     }
-    stage('docker build'){
-        def app = docker.build("binimini/toy-discord")
-    }
-    stage('docker push') {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credential')
-        app.push("latest")
-    }
 }
