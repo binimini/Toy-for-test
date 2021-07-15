@@ -1,4 +1,8 @@
 node {
+    environment{
+        registry = "binimini/toy-discord"
+        registryCredential = "docker-hub-credential"
+    }
     stage ('clone') {
         git 'https://github.com/binimini/Toy-for-test.git' // git clone
     }
@@ -12,5 +16,16 @@ node {
     }
     stage('build'){
         sh './gradlew bootjar'
+    }
+    stage('docker build'){
+        sh 'docker build -t $registry:latest .'
+    }
+    stage('docker push') {
+        withDockerRegistry([ credentialsId: registryCredential, url: "" ]) {
+            sh 'docker push $registry:latest'
+        }
+    }
+    stage('docker remove') {
+        sh "docker rmi $registry"
     }
 }
