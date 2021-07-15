@@ -18,14 +18,10 @@ node {
         sh './gradlew bootjar'
     }
     stage('docker build'){
-        sh 'docker build -t $registry:latest .'
+        app = docker.build("$registry")
     }
     stage('docker push') {
-        withDockerRegistry([ credentialsId: registryCredential, url: "" ]) {
-            sh 'docker push $registry:latest'
-        }
-    }
-    stage('docker remove') {
-        sh "docker rmi $registry"
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credential')
+        app.push("latest")
     }
 }
