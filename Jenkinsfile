@@ -11,6 +11,7 @@ node {
         }
     }
     stage('build'){
+        sh 'chmod +x gradlew'
         sh './gradlew bootjar'
     }
     stage('publish'){
