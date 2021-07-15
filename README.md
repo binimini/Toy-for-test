@@ -15,8 +15,12 @@ Travis CI clone git repository to new virtual environment and conduct script
 
 ## Jenkins
 - [X] Pipeline script from SCM : credential 설정 후 github 연동
-- [X] pipeline script : config file provider plugin에서 properties 내용 읽어 생성, spring build
+
+- [X] Pipeline script : git clone - config file provider plugin 통해 properties 생성, spring project build
+
 - [ ] Docker : docker 연동으로 jenkins 컨테이너 아닌 서버 컨테이너에서 jar run
+
+- [X] Publish over SSH : EC2로 빌드 결과물 전달 
 
 ## Spring
 
